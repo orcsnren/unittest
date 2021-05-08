@@ -47,7 +47,11 @@ public class Student {
     }
 
     public void addCourse(LecturerCourseRecord lecturerCourseRecord) {
-
+        if (lecturerCourseRecord == null) {
+            throw new IllegalArgumentException("Cant be added null lecturer course record");
+        }
+        StudentCourseRecord courseRecord = new StudentCourseRecord(lecturerCourseRecord);
+        studentCourseRecords.add(courseRecord);
     }
 
     public void dropCourse(LecturerCourseRecord lecturerCourseRecord) {
