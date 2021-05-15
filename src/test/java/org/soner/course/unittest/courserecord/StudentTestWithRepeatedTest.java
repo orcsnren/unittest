@@ -1,12 +1,13 @@
 package org.soner.course.unittest.courserecord;
 
 import org.junit.jupiter.api.*;
+import org.soner.course.unittest.interfaces.TestLifeCycleReporter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class StudentTestWithRepeatedTest {
+public class StudentTestWithRepeatedTest implements TestLifeCycleReporter {
 
     private Student student;
 
