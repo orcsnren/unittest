@@ -58,5 +58,12 @@ public class Student {
 
     }
 
+    public boolean isTakeCourse(Course course) {
+        return studentCourseRecords.stream()
+                .map(StudentCourseRecord::getLecturerCourseRecord)
+                .map(LecturerCourseRecord::getCourse)
+                .anyMatch(course1 -> course1.equals(course));
+    }
+
 
 }

@@ -1,5 +1,7 @@
 package org.soner.course.unittest.courserecord;
 
+import org.soner.course.unittest.model.CourseBuilder;
+
 public class Course {
 
     private String code;
@@ -9,12 +11,23 @@ public class Course {
     private int credit;
     private Department department;
 
-    Course(){
+    Course() {
 
     }
 
-    Course(String code, String name, int credit) {
+    Course(String code) {
+        this.code = code;
+    }
 
+    Course(String code, String name, int credit) {
+        this.code = code;
+        this.name = name;
+        this.credit = credit;
+
+    }
+
+    public static CourseBuilder newCourse() {
+        return new CourseBuilder(new Course());
     }
 
     public String getCode() {
