@@ -8,6 +8,7 @@ public class Semester {
 
     private final int year;
     private final Term term;
+    private int addDropPeriodInWeek = 2;
 
     public Semester(LocalDate localDate) {
         this.year = localDate.getYear();
@@ -77,4 +78,20 @@ public class Semester {
     public String toString() {
         return this.getTerm().name() + " of " + this.getYear();
     }
+
+
+    public boolean isAddDropAllowed() {
+        if (!isActive()) {
+            return false;
+        }
+
+        final LocalDate endOfAddDropPeriod = LocalDate.of(this.getYear(), this.getTerm().getStartMonth(), 1).plusWeeks(addDropPeriodInWeek);
+
+        return !LocalDate.now().isAfter(endOfAddDropPeriod);
+    }
+
+    public void setAddDropPeriodInWeek(int addDropPeriodInWeek) {
+        this.addDropPeriodInWeek = addDropPeriodInWeek;
+    }
+
 }

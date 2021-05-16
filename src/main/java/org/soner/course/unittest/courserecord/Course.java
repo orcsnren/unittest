@@ -83,4 +83,21 @@ public class Course {
         ELECTIVE
     }
 
+    @Override
+    public boolean equals(Object obj) {
+
+        if (!Course.class.isInstance(obj)) {
+            return false;
+        }
+
+        final Course course2 = (Course) obj;
+        return course2.getCode().equals(this.getCode());
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * this.getCode().hashCode();
+    }
+
+
 }

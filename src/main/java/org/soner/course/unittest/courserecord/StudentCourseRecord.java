@@ -1,45 +1,49 @@
 package org.soner.course.unittest.courserecord;
 
+import java.math.BigDecimal;
+
 public class StudentCourseRecord {
+
     private final LecturerCourseRecord lecturerCourseRecord;
     private Grade grade;
     private CourseReview courseReview;
     private Student student;
 
-
     public StudentCourseRecord(LecturerCourseRecord lecturerCourseRecord) {
         this.lecturerCourseRecord = lecturerCourseRecord;
-    }
-
-    public enum Grade {
-        A1, A2, B1, B2, B3, C, D, E, F
     }
 
     public LecturerCourseRecord getLecturerCourseRecord() {
         return lecturerCourseRecord;
     }
 
-    public Grade getGrade() {
-        return grade;
-    }
-
     public void setGrade(Grade grade) {
         this.grade = grade;
     }
 
-    public CourseReview getCourseReview() {
-        return courseReview;
+    public Grade getGrade() {
+        return grade;
     }
 
-    public void setCourseReview(CourseReview courseReview) {
-        this.courseReview = courseReview;
-    }
+    public enum Grade {
 
-    public Student getStudent() {
-        return student;
-    }
+        A1(BigDecimal.valueOf(4)),
+        A2(BigDecimal.valueOf(3.5)),
+        B1(BigDecimal.valueOf(3)),
+        B2(BigDecimal.valueOf(2.5)),
+        C(BigDecimal.valueOf(2)),
+        D(BigDecimal.valueOf(1.5)),
+        E(BigDecimal.ONE),
+        F(BigDecimal.ZERO);
 
-    public void setStudent(Student student) {
-        this.student = student;
+        private BigDecimal gradeInNumber;
+
+        Grade(BigDecimal gradeInNumber) {
+            this.gradeInNumber = gradeInNumber;
+        }
+
+        public BigDecimal getGradeInNumber() {
+            return gradeInNumber;
+        }
     }
 }
