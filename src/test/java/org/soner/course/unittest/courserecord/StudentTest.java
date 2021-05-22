@@ -1,6 +1,8 @@
 package org.soner.course.unittest.courserecord;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -29,13 +31,13 @@ public class StudentTest {
             return orcun.getName().endsWith("a");
         }, () -> "Student's name ends with a");
 
-        final Student ahmet = new Student("2", "Ahmet", "Yilmaz");
-        assertArrayEquals(new String[]{"Soner", "Ahmet"}, Stream.of(soner, ahmet).map(Student::getName).toArray());
-        //assertArrayEquals(new String[]{"Soner", "Orcun"}, Stream.of(soner, ahmet).map(Student::getName).toArray());
+        final Student salih = new Student("2", "Salih", "Eren");
+        assertArrayEquals(new String[]{"Soner", "Salih"}, Stream.of(soner, salih).map(Student::getName).toArray());
+        //assertArrayEquals(new String[]{"Soner", "Orcun"}, Stream.of(soner, salih).map(Student::getName).toArray());
 
         Student sonerTmp = soner;
         assertSame(soner, sonerTmp);//reference compare
-        assertNotSame(soner, ahmet);
+        assertNotSame(soner, salih);
     }
 
     @Test
@@ -60,9 +62,52 @@ public class StudentTest {
         // After the time has elapsed, the process is interrupted.
         assertTimeoutPreemptively(Duration.ofMillis(5), () -> {
 //            Thread.sleep(10);
-            new Student("2", "Ahmet", "Yilmaz").addCourse(new LecturerCourseRecord());
+            new Student("2", "soner", "Yilmaz").addCourse(new LecturerCourseRecord());
         });
 
 
+    }
+
+
+    @Nested
+    @DisplayName("Add Course to Student")
+    @Tag("addCourse")
+    class AddCourseToStudent {
+        @Test
+        @DisplayName("Add course to a student less than 10ms")
+        void addCourseToStudentWithATimeConstraint() {
+
+            assertTimeout(Duration.ofMillis(10), () -> {
+                //nothing will be done and this code run under 10ms
+            });
+
+            final String result = assertTimeout(Duration.ofMillis(10), () -> {
+                //return a string and this code run under 10ms
+                return "some string result";
+            });
+            assertEquals("some string result", result);
+
+            final Student student = new Student("1", "Soner", "Eren");
+            LecturerCourseRecord lecturerCourseRecord = new LecturerCourseRecord(null, null);
+            assertTimeout(Duration.ofMillis(10), () -> student.addCourse(lecturerCourseRecord));
+
+            assertTimeoutPreemptively(Duration.ofMillis(10), () -> student.addCourse(lecturerCourseRecord));
+        }
+
+        @Nested
+        @DisplayName("Add Course to Student(Exceptional)")
+        @Tag("exceptional")
+        class AddCourseToStudentExceptionScenario {
+            @Test
+            @DisplayName("Got an exception when add a null lecturer course record to student")
+            void throwsExceptionWhenAddToNullCourseToStudent() {
+
+                final Student soner = new Student("1", "Soner", "Eren");
+                assertThrows(IllegalArgumentException.class, () -> soner.addCourse(null));
+                assertThrows(IllegalArgumentException.class, () -> soner.addCourse(null), "Throws IllegalArgumentException");
+                final IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> soner.addCourse(null));
+                assertEquals("Cant be added null lecturer course record", illegalArgumentException.getMessage());
+            }
+        }
     }
 }
