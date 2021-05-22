@@ -1,7 +1,10 @@
 package org.soner.course.unittest.courserecord;
 
+import org.soner.course.unittest.courserecord.exceptions.NoCourseFoundForStudentException;
 import org.soner.course.unittest.courserecord.exceptions.NotActiveSemesterException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
@@ -104,4 +107,41 @@ public class Student {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+    public void addGrade(LecturerCourseRecord lecturerCourseRecord, StudentCourseRecord.Grade grade) {
+
+        final StudentCourseRecord studentCourseRecord1 = studentCourseRecords.stream()
+                .filter(studentCourseRecord -> studentCourseRecord.getLecturerCourseRecord().equals(lecturerCourseRecord))
+                .findAny()
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                new NoCourseFoundForStudentException(String.format("Student didn't take any course for lecturer course record: %s", lecturerCourseRecord == null ? "null" : lecturerCourseRecord.getCourse().getCode()))
+
+                        )
+
+                );
+        studentCourseRecord1.setGrade(grade);
+    }
+
+    public BigDecimal gpa() {
+
+        int totalCredit = 0;
+        BigDecimal weightedGpa = BigDecimal.ZERO;
+
+        for (StudentCourseRecord studentCourseRecord : studentCourseRecords) {
+            totalCredit += courseCredit(studentCourseRecord);
+            weightedGpa = weightedGpa.add(BigDecimal.valueOf(courseCredit(studentCourseRecord)).multiply(courseGrade(studentCourseRecord)));
+        }
+
+        return weightedGpa.divide(BigDecimal.valueOf(totalCredit), 2, RoundingMode.HALF_UP);
+    }
+
+    private int courseCredit(StudentCourseRecord studentCourseRecord) {
+        return studentCourseRecord.getLecturerCourseRecord().getCredit();
+    }
+
+    private BigDecimal courseGrade(StudentCourseRecord studentCourseRecord) {
+        return studentCourseRecord.getGrade().getGradeInNumber();
+    }
+
 }

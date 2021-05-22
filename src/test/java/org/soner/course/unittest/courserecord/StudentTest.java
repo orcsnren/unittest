@@ -4,8 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -108,6 +111,24 @@ public class StudentTest {
                 final IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> soner.addCourse(null));
                 assertEquals("Cant be added null lecturer course record", illegalArgumentException.getMessage());
             }
+        }
+    }
+
+    @ExtendWith(ParameterResolverForGpaCalculation.class)
+    @Nested
+    @DisplayName("Calculate Gpa for a Student")
+    @Tag("calculateGpa")
+    class CalculateGpa {
+
+        @Test
+        @DisplayName("Calculate Gpa for a Student")
+        void calculateGpa(Student student, Map<LecturerCourseRecord, StudentCourseRecord.Grade> lecturerCourseRecordGradeMap, BigDecimal expectedGpa) {
+
+            lecturerCourseRecordGradeMap.forEach((lecturerCourseRecord, grade) -> {
+                student.addCourse(lecturerCourseRecord);
+                student.addGrade(lecturerCourseRecord, grade);
+            });
+            assertEquals(expectedGpa, student.gpa());
         }
     }
 }
