@@ -2,6 +2,10 @@ package org.soner.course.unittest.courserecord;
 
 import org.junit.jupiter.api.*;
 import org.soner.course.unittest.courserecord.exceptions.NotActiveSemesterException;
+import org.soner.course.unittest.courserecord.model.Course;
+import org.soner.course.unittest.courserecord.model.Lecturer;
+import org.soner.course.unittest.courserecord.model.LecturerCourseRecord;
+import org.soner.course.unittest.courserecord.model.Semester;
 
 import java.time.LocalDate;
 

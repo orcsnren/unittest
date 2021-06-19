@@ -1,8 +1,8 @@
-package org.soner.course.unittest.courserecord;
+package org.soner.course.unittest.courserecord.model;
 
 import java.time.LocalDate;
 
-import static org.soner.course.unittest.courserecord.Semester.Term.*;
+import static org.soner.course.unittest.courserecord.model.Semester.Term.*;
 
 public class Semester {
 

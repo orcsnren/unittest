@@ -1,6 +1,10 @@
 package org.soner.course.unittest.courserecord;
 
 import org.junit.jupiter.api.*;
+import org.soner.course.unittest.courserecord.model.Course;
+import org.soner.course.unittest.courserecord.model.LecturerCourseRecord;
+import org.soner.course.unittest.courserecord.model.Semester;
+import org.soner.course.unittest.courserecord.model.Student;
 import org.soner.course.unittest.interfaces.TestLifeCycleReporter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

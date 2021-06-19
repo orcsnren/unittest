@@ -3,6 +3,7 @@ package org.soner.course.unittest.courserecord;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.function.ThrowingConsumer;
 import org.soner.course.unittest.courserecord.exceptions.NotActiveSemesterException;
+import org.soner.course.unittest.courserecord.model.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

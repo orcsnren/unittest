@@ -1,4 +1,4 @@
-package org.soner.course.unittest.courserecord;
+package org.soner.course.unittest.courserecord.model;
 
 import org.soner.course.unittest.courserecord.exceptions.NotActiveSemesterException;
 
@@ -75,5 +75,15 @@ public class Lecturer {
 
         lecturerCourseRecord.setLecturer(this);
         this.lecturerCourseRecords.add(lecturerCourseRecord);
+    }
+
+    public LecturerCourseRecord lecturerCourseRecord(Course course, Semester semester) {
+        return lecturerCourseRecords.stream()
+                .filter(
+                        lecturerCourseRecord ->
+                                lecturerCourseRecord.getCourse().equals(course) && lecturerCourseRecord.getSemester().equals(semester)
+                )
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Can't find lecturer course record for course<%s> and semester<%s>", course, semester)));
     }
 }

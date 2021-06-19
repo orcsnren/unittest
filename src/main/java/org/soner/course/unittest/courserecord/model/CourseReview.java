@@ -1,4 +1,4 @@
-package org.soner.course.unittest.courserecord;
+package org.soner.course.unittest.courserecord.model;
 
 public class CourseReview {
 

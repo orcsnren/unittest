@@ -1,7 +1,7 @@
 package org.soner.course.unittest.model;
 
-import org.soner.course.unittest.courserecord.Course;
-import org.soner.course.unittest.courserecord.Department;
+import org.soner.course.unittest.courserecord.model.Course;
+import org.soner.course.unittest.courserecord.model.Department;
 
 public class CourseBuilder {
     private final Course course;

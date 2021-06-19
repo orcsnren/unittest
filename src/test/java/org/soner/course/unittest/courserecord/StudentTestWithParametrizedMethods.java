@@ -6,6 +6,10 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
+import org.soner.course.unittest.courserecord.model.Course;
+import org.soner.course.unittest.courserecord.model.LecturerCourseRecord;
+import org.soner.course.unittest.courserecord.model.Semester;
+import org.soner.course.unittest.courserecord.model.Student;
 
 import java.util.Random;
 import java.util.stream.Stream;

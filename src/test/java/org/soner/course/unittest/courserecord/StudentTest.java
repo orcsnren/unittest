@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.soner.course.unittest.courserecord.model.LecturerCourseRecord;
+import org.soner.course.unittest.courserecord.model.Student;
+import org.soner.course.unittest.courserecord.model.StudentCourseRecord;
 
 import java.math.BigDecimal;
 import java.time.Duration;

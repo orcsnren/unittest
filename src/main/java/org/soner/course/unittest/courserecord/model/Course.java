@@ -1,4 +1,4 @@
-package org.soner.course.unittest.courserecord;
+package org.soner.course.unittest.courserecord.model;
 
 import org.soner.course.unittest.model.CourseBuilder;
 

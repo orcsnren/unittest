@@ -1,6 +1,7 @@
 package org.soner.course.unittest.courserecord;
 
 import org.junit.jupiter.api.*;
+import org.soner.course.unittest.courserecord.model.Student;
 
 import java.time.LocalDateTime;
 

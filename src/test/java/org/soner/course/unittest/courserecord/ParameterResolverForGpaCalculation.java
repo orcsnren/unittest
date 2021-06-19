@@ -4,11 +4,15 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
+import org.soner.course.unittest.courserecord.model.Course;
+import org.soner.course.unittest.courserecord.model.LecturerCourseRecord;
+import org.soner.course.unittest.courserecord.model.Semester;
+import org.soner.course.unittest.courserecord.model.Student;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
-import static org.soner.course.unittest.courserecord.StudentCourseRecord.Grade.*;
+import static org.soner.course.unittest.courserecord.model.StudentCourseRecord.Grade.*;
 
 public class ParameterResolverForGpaCalculation implements ParameterResolver {
     @Override

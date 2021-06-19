@@ -1,4 +1,4 @@
-package org.soner.course.unittest.courserecord;
+package org.soner.course.unittest.courserecord.model;
 
 import org.soner.course.unittest.courserecord.exceptions.NoCourseFoundForStudentException;
 import org.soner.course.unittest.courserecord.exceptions.NotActiveSemesterException;
@@ -6,7 +6,6 @@ import org.soner.course.unittest.courserecord.exceptions.NotActiveSemesterExcept
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
