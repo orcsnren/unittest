@@ -78,7 +78,7 @@ public class Lecturer {
     }
 
     public LecturerCourseRecord lecturerCourseRecord(Course course, Semester semester) {
-        return lecturerCourseRecords.stream()
+        return getLecturerCourseRecords().stream()
                 .filter(
                         lecturerCourseRecord ->
                                 lecturerCourseRecord.getCourse().equals(course) && lecturerCourseRecord.getSemester().equals(semester)

@@ -11,15 +11,15 @@ public class Course {
     private int credit;
     private Department department;
 
-    Course() {
+    public Course() {
 
     }
 
-    Course(String code) {
+    public Course(String code) {
         this.code = code;
     }
 
-    Course(String code, String name, int credit) {
+    public Course(String code, String name, int credit) {
         this.code = code;
         this.name = name;
         this.credit = credit;
