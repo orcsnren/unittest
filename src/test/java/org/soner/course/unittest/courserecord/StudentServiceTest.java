@@ -13,8 +13,7 @@ import org.soner.course.unittest.courserecord.model.*;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -75,7 +74,40 @@ public class StudentServiceTest {
 
     }
 
-    class MyCourseArgumentMatcher implements ArgumentMatcher<Course> {
+    @Test
+    void dropCourse() {
+
+        final Course course = new Course("101");
+
+        when(courseService.findCourse(course))
+                .thenReturn(Optional.empty())
+                .thenReturn(Optional.of(course));
+        final LecturerCourseRecord lecturerCourseRecord = new LecturerCourseRecord(course, new Semester());
+        when(lecturer.lecturerCourseRecord(eq(course), any(Semester.class))).thenReturn(lecturerCourseRecord);
+        when(lecturerService.findLecturer(eq(course), any(Semester.class)))
+                .thenReturn(Optional.empty())
+                .thenReturn(Optional.of(lecturer));
+        final Student student = mock(Student.class);
+        when(studentRepository.findById("id1"))
+                .thenReturn(Optional.empty())
+                .thenReturn(Optional.of(student));
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> studentService.dropCourse("id1", course))
+                .withMessageContaining("Can't find a student");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> studentService.dropCourse("id1", course))
+                .withMessageContaining("Can't find a course");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> studentService.dropCourse("id1", course))
+                .withMessageContaining("Can't find a lecturer");
+
+        studentService.dropCourse("id1", course);
+    }
+
+    public static class MyCourseArgumentMatcher implements ArgumentMatcher<Course> {
         @Override
         public boolean matches(Course course) {
             return course.getCode().equals("101");
